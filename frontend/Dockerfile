@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1.7
-FROM node:22.16.0-alpine AS dependencies
+FROM node:26.8-alpine AS dependencies
 WORKDIR /workspace
 COPY package.json ./
 RUN npm install --no-audit --no-fund
@@ -13,7 +13,7 @@ FROM dependencies AS build
 COPY . .
 RUN npm run build
 
-FROM node:22.16.0-alpine AS production
+FROM node:26.8-alpine AS production
 ENV NODE_ENV=production \
     NITRO_HOST=0.0.0.0 \
     NITRO_PORT=3000
